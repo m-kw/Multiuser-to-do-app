@@ -10,17 +10,16 @@ class Form extends React.Component {
     this.socket = io('http://localhost:8000');
   }
 
-  submitForm(e) {
-    e.preventDefault();
-    this.props.addTask(this.state.taskName);
-    this.socket.emit('addTask', this.state.taskName);
-  }
-
   render() {
     const { taskName } = this.state;
+    const { addTask } = this.props;
 
     return (
-      <form id="add-task-form" onSubmit={() => this.submitForm()}>
+      <form id="add-task-form" onSubmit={(e) =>{
+        e.preventDefault();
+        addTask(this.state.taskName);
+        // this.socket.emit('addTask', this.state.taskName);
+      }}>
         <input
           className="text-input"
           autoComplete="off"

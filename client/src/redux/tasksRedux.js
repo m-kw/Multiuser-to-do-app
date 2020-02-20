@@ -1,3 +1,5 @@
+import shortid from 'shortid';
+
 export const getAll = ({ tasks }) => tasks;
 
 const reducerName = 'tasks';
@@ -10,11 +12,9 @@ export const addTask = payload => ({ payload, type: ADD_TASK });
 export const removeTask = payload => ({ payload, type: REMOVE_TASK });
 
 export default function reducer(statePart = [], action = {}) {
-  console.log('statePart', statePart);
-  console.log(action);
   switch (action.type) {
     case ADD_TASK: {
-      return statePart.push(action.payload);
+      return [...statePart, { id: shortid.generate(), name: action.payload }];
     }
     case REMOVE_TASK: {
       return statePart.filter(el => el.id !== action.payload);
