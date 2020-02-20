@@ -1,18 +1,29 @@
 import React from 'react';
+import io from 'socket.io-client';
 
-const List = () => {
-  return (
-    <ul className="tasks-list">
-      <li className="task">
-        Shopping
-        <button class="btn btn-remove">Remove</button>
-      </li>
-      <li className="task">
-        Go for a walk
-        <button class="btn btn-remove">Remove</button>
-      </li>
-    </ul>
-  )
+class List extends React.Component {
+  state = {
+    tasks: [],
+  }
+
+  componentDidMount() {
+    this.socket = io('http://localhost:8000');
+  }
+
+  render() {
+    const { tasks } = this.state;
+
+    return (
+      <ul className="tasks-list">
+        {tasks.map(el => (
+          <li key={el.id} className="task">
+            {el.name}
+            <button class="btn btn-remove">Remove</button>
+          </li>
+        ))}
+      </ul>
+    )
+  }
 };
 
 export default List;
