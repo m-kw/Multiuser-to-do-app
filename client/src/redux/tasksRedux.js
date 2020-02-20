@@ -10,14 +10,11 @@ export const addTask = payload => ({ payload, type: ADD_TASK });
 export const removeTask = payload => ({ payload, type: REMOVE_TASK });
 
 export default function reducer(statePart = [], action = {}) {
-  console.log(statePart);
+  console.log('statePart', statePart);
   console.log(action);
   switch (action.type) {
     case ADD_TASK: {
-      return {
-        ...statePart,
-        tasks: [...statePart.tasks, action.payload],
-      }
+      return statePart.push(action.payload);
     }
     case REMOVE_TASK: {
       return statePart.filter(el => el.id !== action.payload);

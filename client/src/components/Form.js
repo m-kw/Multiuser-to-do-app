@@ -12,7 +12,7 @@ class Form extends React.Component {
 
   submitForm(e) {
     e.preventDefault();
-    this.addTask(this.state.taskName);
+    this.props.addTask(this.state.taskName);
     this.socket.emit('addTask', this.state.taskName);
   }
 
