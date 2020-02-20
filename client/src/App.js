@@ -1,4 +1,7 @@
 import React from 'react';
+import Form from './components/Form';
+import List from './components/List';
+import Header from './components/Header';
 
 class App extends React.Component {
 
@@ -6,29 +9,14 @@ class App extends React.Component {
     return (
       <div className="App">
 
-        <header>
-          <h1>To-do-app</h1>
-        </header>
+        <Header title="To-do-app" />
 
         <section className="tasks">
           <h2>Tasks</h2>
-
-          <ul className="tasks-list">
-            <li className="task">
-              Shopping
-              <button class="btn">Remove</button>
-            </li>
-            <li className="task">
-              Go for a walk
-              <button class="btn">Remove</button>
-            </li>
-          </ul>
-
-          <form id="add-task-form">
-            <input className="text-input" autocomplete="off" type="text" placeholder="Add new task" id="task-name" />
-            <button className="btn" type="submit">Add</button>
-          </form>
+          <List />
         </section>
+
+        <Form />
 
       </div>
     );
