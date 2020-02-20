@@ -3,7 +3,10 @@ const socket = require('socket.io');
 
 const app = express();
 
-const tasks = [];
+const tasks = [
+  {id: 1, name: 'Shopping'},
+  {id: 2, name: 'Read a book'},
+];
 
 const server = app.listen(process.env.PORT || 8000, () => {
   console.log('Server is running on port 8000');
@@ -23,7 +26,7 @@ io.on('connection', (socket) => {
   socket.on('removeTask', (taskIndex) => {
     console.log('Task with index ' + taskIndex + ' removed');
     tasks.splice(taskIndex, 1);
-    socket.broadcast.emit('removeTask');
+    socket.broadcast.emit('removeTask', taskIndex);
   });
 });
 
