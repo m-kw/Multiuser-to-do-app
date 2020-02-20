@@ -1,25 +1,29 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 import Form from './components/Form';
-import List from './components/List';
+import List from './components/List/ListContainer';
 import Header from './components/Header';
 
 class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <Provider store={store}>
+        <div className="App">
 
-        <Header title="To-do-app" />
+          <Header title="To-do-app" />
 
-        <section className="tasks">
-          <h2>Tasks</h2>
-          <List />
-        </section>
+          <section className="tasks">
+            <h2>Tasks</h2>
+            <List />
+          </section>
 
-        <Form />
+          <Form />
 
-      </div>
+        </div>
+      </Provider>
     );
   };
 }
