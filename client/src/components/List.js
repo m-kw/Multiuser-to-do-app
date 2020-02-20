@@ -5,11 +5,11 @@ const List = () => {
     <ul className="tasks-list">
       <li className="task">
         Shopping
-        <button class="btn">Remove</button>
+        <button class="btn btn-remove">Remove</button>
       </li>
       <li className="task">
         Go for a walk
-        <button class="btn">Remove</button>
+        <button class="btn btn-remove">Remove</button>
       </li>
     </ul>
   )
