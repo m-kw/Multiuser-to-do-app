@@ -15,6 +15,7 @@ const server = app.listen(process.env.PORT || 8000, () => {
 const io = socket(server);
 
 io.on('connection', (socket) => {
+  console.log('A new client added ' + socket.id);
   socket.emit('updateData', tasks);
 
   socket.on('addTask', (task) => {

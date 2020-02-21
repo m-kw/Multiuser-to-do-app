@@ -1,11 +1,7 @@
 import React from 'react';
-import io from 'socket.io-client';
+import { socket } from '../App/App';
 
 class List extends React.Component {
-
-  componentDidMount() {
-    this.socket = io('http://localhost:8000');
-  }
 
   render() {
     const { tasks, removeTask } = this.props;
@@ -17,7 +13,7 @@ class List extends React.Component {
             {el.name}
             <button className="btn btn-remove" onClick={() => {
               removeTask(el.id);
-              this.socket.emit('removeTask', el.id);
+              socket.emit('removeTask', el.id);
             }}>Remove</button>
           </li>
         ))}

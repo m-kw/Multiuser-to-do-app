@@ -1,14 +1,10 @@
 import React from 'react';
-import io from 'socket.io-client';
 import shortid from 'shortid';
+import { socket } from '../App/App';
 
 class Form extends React.Component {
   state = {
     taskName: '',
-  }
-
-  componentDidMount() {
-    this.socket = io('http://localhost:8000');
   }
 
   render() {
@@ -20,7 +16,7 @@ class Form extends React.Component {
         e.preventDefault();
         const id = shortid.generate();
         addTask({ id: id, name: this.state.taskName });
-        this.socket.emit('addTask', { id: id, name: this.state.taskName});
+        socket.emit('addTask', { id: id, name: this.state.taskName});
       }}>
         <input
           className="text-input"
