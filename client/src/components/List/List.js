@@ -11,7 +11,7 @@ class List extends React.Component {
         {tasks.map(el => (
           <li key={el.id} className="task">
             {el.name}
-            <button className="btn btn-remove" onClick={() => {
+            <button key={el.id} className="btn btn-remove" onClick={() => {
               removeTask(el.id);
               socket.emit('removeTask', el.id);
             }}>Remove</button>
