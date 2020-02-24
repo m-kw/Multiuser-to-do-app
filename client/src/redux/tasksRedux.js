@@ -23,7 +23,7 @@ export default function reducer(statePart = [], action = {}) {
       return statePart.filter(el => el.id !== action.payload);
     }
     case UPDATE_TASKS: {
-      return uniq(statePart, action.payload);
+      return action.payload;
     }
     default:
     return statePart;
