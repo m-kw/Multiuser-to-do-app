@@ -3,9 +3,9 @@ const socket = require('socket.io');
 
 const app = express();
 
-const tasks = [
-  {id: 1, name: 'Shopping'},
-  {id: 2, name: 'Read a book'},
+let tasks = [
+  {id: '1', name: 'Shopping'},
+  {id: '2', name: 'Read a book'},
 ];
 
 const server = app.listen(process.env.PORT || 8000, () => {
@@ -16,20 +16,26 @@ const io = socket(server);
 
 io.on('connection', (socket) => {
   console.log('A new client added ' + socket.id);
+  console.log('tasks', tasks);
   socket.emit('updateData', tasks);
 
   socket.on('addTask', (task) => {
     console.log('New task added', task);
     tasks.push(task);
-    console.log('tasks', tasks);
+    console.log('tasks after adding', tasks);
     socket.broadcast.emit('addTask', task);
   });
 
-  // socket.on('removeTask', (taskIndex) => {
-  //   console.log('Task with index ' + taskIndex + ' removed');
-  //   tasks.splice(taskIndex, 1);
-  //   socket.broadcast.emit('removeTask', taskIndex);
-  // });
+  socket.on('removeTask', (id) => {
+    console.log('Task with id ' + id + ' removed');
+    tasks = tasks.filter(function (el) {
+      if (el.id !== id) {
+        return el;
+      }
+    });
+    console.log('tasks after removal', tasks);
+    socket.broadcast.emit('removeTask', id);
+  });
 });
 
 app.use((req, res) => {

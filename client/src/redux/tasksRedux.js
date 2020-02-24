@@ -1,3 +1,5 @@
+import uniq  from 'lodash/uniq';
+
 export const getAll = ({ tasks }) => tasks;
 
 const reducerName = 'tasks';
@@ -21,8 +23,7 @@ export default function reducer(statePart = [], action = {}) {
       return statePart.filter(el => el.id !== action.payload);
     }
     case UPDATE_TASKS: {
-      return [...statePart, { ...action.payload }];
-
+      return uniq(statePart, action.payload);
     }
     default:
     return statePart;
