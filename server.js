@@ -16,13 +16,11 @@ const io = socket(server);
 
 io.on('connection', (socket) => {
   console.log('A new client added ' + socket.id);
-  console.log('tasks', tasks);
   socket.emit('updateData', tasks);
 
   socket.on('addTask', (task) => {
     console.log('New task added', task);
     tasks.push(task);
-    console.log('tasks after adding', tasks);
     socket.broadcast.emit('addTask', task);
   });
 
@@ -33,7 +31,6 @@ io.on('connection', (socket) => {
         return el;
       }
     });
-    console.log('tasks after removal', tasks);
     socket.broadcast.emit('removeTask', id);
   });
 });

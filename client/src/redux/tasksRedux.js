@@ -1,5 +1,3 @@
-import uniq  from 'lodash/uniq';
-
 export const getAll = ({ tasks }) => tasks;
 
 const reducerName = 'tasks';
@@ -14,7 +12,6 @@ export const removeTask = payload => ({ payload, type: REMOVE_TASK });
 export const updateTasks = payload => ({ payload, type: UPDATE_TASKS});
 
 export default function reducer(statePart = [], action = {}) {
-  console.log('action', action);
   switch (action.type) {
     case ADD_TASK: {
       return [...statePart, { id: action.payload.id, name: action.payload.name }];
